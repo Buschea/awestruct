@@ -5,7 +5,7 @@ require 'awestruct/handlers/file_handler'
 require 'awestruct/handlers/front_matter_handler'
 require 'awestruct/handlers/interpolation_handler'
 require 'awestruct/handlers/layout_handler'
-require 'rdiscount'
+require 'markdown_meta'
 
 module Awestruct
   module Handlers
@@ -41,8 +41,7 @@ module Awestruct
       end
 
       def rendered_content(context, with_layouts=true)
-        doc = RDiscount.new( delegate.rendered_content( context, with_layouts ) )
-        doc.to_html
+        MarkdownMeta.to_html( delegate.rendered_content( context, with_layouts ) )
       end
 
     end

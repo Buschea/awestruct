@@ -42,4 +42,7 @@ describe Awestruct::Rack::App do
       last_response.status.should == 404
     end
   end
+
+  describe "Running under JRuby" do
+  end
 end

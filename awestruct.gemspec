@@ -24,7 +24,8 @@ spec = Gem::Specification.new do |s|
     s.add_dependency 'sass', '~> 3.1.15'
     s.add_dependency 'less', '~> 2.2.2'
     s.add_dependency 'mustache', '~> 0.99.4'    
-    s.add_dependency 'rdiscount', '~> 1.6.8'
+    #s.add_dependency 'rdiscount', '~> 1.6.8'
+    s.add_dependency 'markdown_meta', '~> 0.0.2'
     s.add_dependency 'RedCloth', '~> 4.2.9'
     s.add_dependency 'coffee-script', '~> 2.2.0'
     s.add_dependency 'nokogiri', '~> 1.5.2'
@@ -40,7 +41,6 @@ spec = Gem::Specification.new do |s|
     s.add_dependency 'yui-compressor', '~> 0.9.4'
 
     s.add_dependency 'listen', '~> 0.5.0'
-    s.add_dependency 'thin', '~> 1.4.1'
     s.add_dependency 'eventmachine', '~> 1.0.0.rc.4'
 end
 

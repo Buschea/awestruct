@@ -31,7 +31,7 @@ describe Awestruct::Handlers::MarkdownHandler do
 
     rendered = markdown_handler.rendered_content( create_context )
     rendered.should_not be_nil
-    rendered.should =~ %r(<h1>This is a Markdown page</h1>) 
+    rendered.should =~ %r(.*<h1.*>This is a Markdown page</h1>.*) 
   end
 
 end

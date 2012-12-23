@@ -9,6 +9,8 @@ group :development do
   gem 'libv8', '~> 3.11.8', :platforms => 'ruby'
   gem 'therubyracer', '~> 0.11.0', :platforms => 'ruby'
   gem 'therubyrhino', '~> 1.73', :platforms => 'jruby'
+  gem 'thin', '~> 1.4.1', :platforms => 'ruby'
+  gem 'webrick', '~> 1.3.1', :platforms => 'jruby'
 end
 
 group :test do
