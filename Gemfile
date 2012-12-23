@@ -11,6 +11,7 @@ group :development do
   gem 'therubyrhino', '~> 1.73', :platforms => 'jruby'
   gem 'thin', '~> 1.4.1', :platforms => 'ruby'
   gem 'webrick', '~> 1.3.1', :platforms => 'jruby'
+  gem 'uglifier', '~> 1.3.0'
 end
 
 group :test do

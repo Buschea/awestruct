@@ -2,15 +2,17 @@ require 'shellwords'
 require 'fileutils'
 require 'htmlcompressor'
 require 'yui/compressor'
+require 'uglifier'
 
 ##
 # Awestruct:Extensions:Minify is a transformer that minimizes JavaScript, CSS and HTML files.
 # The transform runs on the rendered stream before it's written to the output path.
 #
-# Minification is performed by the following three libraries:
+# Minification is performed by the following libraries:
 #
 #   htmlcompressor (minifies HTML): http://code.google.com/p/htmlcompressor/
-#   yuicompressor (minifies JavaScript and CSS): http://developer.yahoo.com/yui/compressor/
+#   yuicompressor (minifies CSS): http://developer.yahoo.com/yui/compressor/
+#   uglifier (minifies JavaScript): https://github.com/lautis/uglifier
 #   pngcrush (minifies PNG): http://pmt.sourceforge.net/pngcrush/
 #
 # These commands must be available on your PATH in order to use them.
@@ -73,7 +75,7 @@ module Awestruct
                 input = yuicompressor_css(page, input)
               when :js
                 print "minifying js #{page.output_path}"
-                input = yuicompressor_js(page, input)
+                input = js_compressor(page, input)
               when :png
                 print "minifying png #{page.output_path}"
                 input = pngcrush(page, input)
@@ -86,6 +88,12 @@ module Awestruct
 
       private
 
+      class JSCompressor
+        def compress( input )
+          Uglifier.new(:mangle=>false).compile(input)
+        end
+      end
+
       def htmlcompressor(page, input, minify_html_opts)
         opts = minify_html_opts.nil? ? {}:minify_html_opts
         compressor(page, input, HtmlCompressor::Compressor.new(opts))
@@ -95,8 +103,8 @@ module Awestruct
         compressor(page, input, YUI::CssCompressor.new)
       end
 
-      def yuicompressor_js(page, input)
-        compressor(page, input, YUI::JavaScriptCompressor.new)
+      def js_compressor(page, input)
+        compressor(page, input, JSCompressor.new)
       end
 
       def compressor(page, input, compressor)
